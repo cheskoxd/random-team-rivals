@@ -82,7 +82,33 @@ client.once('ready', () => {
 
 // Message event to handle commands
 client.on('messageCreate', message => {
-  if (message.content.startsWith('!randomteam') && !message.author.bot) {
+  if (message.author.bot) return;
+  if (message.content.toLowerCase().includes('/randomhelp')) {
+
+
+    // Create the embed
+    const helpEmbed = new EmbedBuilder()
+      .setColor('#0099FF')
+      .setTitle('Random Rivals Team Help')
+      .setDescription('The `!randomteam` command returns a random team to play rivals.')
+      .addFields(
+        {
+          name: 'Randomize users',
+          value: 'You can specify up to 6 usernames after the command to assign characters to specific users. If no usernames are provided, the bot will randomly assign characters.',
+        },
+        {
+          name: 'Example',
+          value: '`!randomteam Alice Bob Charlie`',
+        }
+      )
+      .setFooter({ text: 'Bot developed by Cheskodev', iconURL: client.user.displayAvatarURL() })
+      .setTimestamp();
+
+    // Send the embed
+    message.channel.send({ embeds: [helpEmbed] });
+  }
+
+  if (message.content.startsWith('!randomteam')) {
 
     // Parse command for usernames
     const args = message.content.slice(11).trim().split(' ').filter(arg => arg); // Remove "!random" and split by space, filter empty
