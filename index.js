@@ -83,7 +83,7 @@ client.once('ready', () => {
 // Message event to handle commands
 client.on('messageCreate', message => {
   if (message.author.bot) return;
-  if (message.content.toLowerCase().includes('/randomhelp')) {
+  if (message.content.toLowerCase().includes('!randomhelp')) {
 
 
     // Create the embed
